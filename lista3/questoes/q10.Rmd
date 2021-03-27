@@ -1,1 +1,25 @@
 # Questão 10
+
+## a)
+
+Considerando a questão anterior, temos que a proporção $\hat{p}$ de peças em uma caixa de 100 unidades tem distribuição aproxida por $N(0,1; 0,0009)$. E queremos $P(\hat{p} > 0,1)$, assim:
+
+$P(\hat{p} > 0,1) = P\Big(Z > \frac{0,1 - 0,1}{\sqrt{0,0009}}\Big) = P(Z > 0) = 50\%$.
+
+## b)
+
+Queremos $P(\hat{p} = 0)$, sendo assim não é recomendado utilizar a distribuição normal já que queremos uma probabilidade pontual, mas podemos utilizar a distribuição binomial $\hat{p} \sim Bin(100;0.1)$. Sendo assim, $P(\hat{p} = 0) \approx 2,65 \times 10^{-5} \approx 0$.
+
+## c)
+
+
+```{r}
+
+f <- function(x) { dnorm(x, mean = 10, sd = 3) }
+
+barplot(dbinom(seq(0, 100), 100, 0.1), space = 0, ylim = c(0, .15), axes = FALSE, xlab = "n", ylab = "Densidade")
+curve(f, add = TRUE)
+axis(1)
+axis(2)
+```
+

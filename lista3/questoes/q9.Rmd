@@ -1,1 +1,7 @@
 # Questão 9
+
+A parada é desnecessária caso o processo ainda esteja dentro da margem de $10\%$ itens defeituosos. No pior caso, sendo o próprio $10\%$.
+
+Sendo assim, o número $Y$ de peças defeituosas no sorteio de 20 peças tem distribuição $Y \sim Bin(20; 0,1)$ e a proporção de peças com defeito $\hat{p}$ tem distribuição aproximadamente $N(0,1; \frac{0,1\cdot 0,9}{20}) = N(0,1; 0,0045)$.
+
+Queremos $P(\hat{p} > 0,15) \rightarrow P(Z > 0,75) = 1 - P(Z < 0,75) = 1 - 0,7734 = 0,2266$. Assim a probabilidade de uma parada desnecessária é $22,66\%$.

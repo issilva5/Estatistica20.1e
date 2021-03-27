@@ -1,1 +1,108 @@
 # Questão 8
+
+```{r libs, include = FALSE}
+library(tidyverse)
+library(tigerstats)
+```
+
+## a)
+
+Temos que $S_n \sim Bin(8;0,20)$, assim:
+
+```{r, warning=FALSE}
+
+dist <- list('n' = as.character(seq(0,8)),
+             '$P(S_n = n)$' = round(dbinom(seq(0,8), 8, 0.2), 3)) %>% 
+  as_tibble() %>% 
+  t() %>% 
+  as_tibble()
+
+rownames(dist) <- c("n", "$P(S_n = n)$")
+
+dist %>% knitr::kable(digits = 3, col.names = rep("", 9))
+
+```
+
+## b)
+
+Temos que $25\%$ de peças defeituosas corresponde a $25\%\cdot8 = 2$ peças. Assim, desejamos obter $P(S_n \leq 2)$. Usando R:
+
+```{r}
+p <- pbinom(2, 8, 0.20)
+```
+
+Assim, $P(S_n \leq 2) =$ `r p`.
+
+## c)
+
+Pelo TCL, temos que $S_n \sim N(np; npq)$, onde $n = 8$, $p = 0,20$ e $q = 0,80$, assim $S_n \sim N(1,6; 1,28)$. Agora, calculemos $P(S_n \leq 2)$, correspondente a no máximo 25% de peças com defeito:
+
+$P(S_n \leq 2) \rightarrow P\big(Z \leq \frac{2 - 1,6}{\sqrt{1,28}}\big) = P(Z \leq 0,35)$.
+
+Usando a tabela temos que $P(Z \leq 0,35) = 0,6368$. Calculando no R, temos:
+
+```{r}
+p <- pnorm(0.35)
+```
+
+Logo $P(Z \leq 0,35) =$ `r p`. A probabilidade foi bem diferente, isso se deve ao fato do n ser pequeno e $n\cdot p < 5$, assim fazendo a aproximação não ser muito boa.
+
+## d)
+
+Considerando um sorteio de 30 peças. Temos que $25\%\cdot30=7.5$.
+
+Usando a distribuição binomial (item b), temos:
+
+```{r}
+pb <- pbinom(7, 30, 0.20) # Como a variável é discreta 7, pode ser usando ao invés de 7,5
+```
+
+Usando a aproximação pela Normal (item c), temos:
+
+$S_n \sim N(np; npq) \rightarrow S_n \sim N(6; 4,8)$, assim calculando no R:
+
+```{r}
+pn <- pnorm(7.5, mean = 6, sd = sqrt(4.8))
+```
+
+Pela binomial temos $P(S_n \leq 7.5) =$ `r pb` e pela normal temos $P(S_n \leq 7.5) =$ `r pn`. Com $n = 30$, temos uma aproximação bem mais próxima do que as calculadas com $n = 5$, nos itens b e c.
+
+## e)
+
+### Representação do item a
+
+```{r}
+dist %>% t() %>% as_tibble() %>% 
+  ggplot(aes(x = n, y = `$P(S_n = n)$`)) +
+  geom_bar(stat = "identity", position = 'dodge') +
+  labs(title = "Distribuição da probabilidade",
+       x = "Nº de peças com defeito",
+       y = "Probabilidade") +
+  geom_text(mapping = aes(x = n, y = `$P(S_n = n)$`, label = `$P(S_n = n)$`), 
+            color = 'red',
+            nudge_y = 0.2)
+```
+
+### Representação do item b e c
+
+```{r}
+
+f <- function(x) { dnorm(x, mean = 1.6, sd = sqrt(1.28)) }
+
+barplot(dbinom(seq(0, 8), 8, 0.2), ylim = c(0, .4), space = 0, xlab = "n", ylab = "Densidade")
+curve(f, from = 0, to = 8, add = TRUE)
+axis(1)
+axis(2)
+```
+
+### Representação do item d
+
+```{r}
+
+f <- function(x) { dnorm(x, mean = 6, sd = sqrt(4.8)) }
+
+barplot(dbinom(seq(0, 30), 30, 0.2), ylim = c(0, .2), axes = FALSE, space = 0, xlab = "n", ylab = "Densidade")
+curve(f, from = 0, to = 30, add = TRUE)
+axis(1)
+axis(2)
+```

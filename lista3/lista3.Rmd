@@ -6,6 +6,7 @@ output: pdf_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+options(scipen = 10, digits = 4, OutDec = ",")
 ```
 
 ```{r child = 'questoes/q1.Rmd'}
