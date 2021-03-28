@@ -1,1 +1,24 @@
 # Questão 2
+
+## a)
+
+Sabendo que $X \sim N(100, 10^{2})$, temos que, $P(90 < X < 110) = P(\frac{90 - 100}{10} < Z < \frac{110 - 100}{10}) = P(-1 < Z < 1)$, sendo $Z \sim N(0,1)$, temos que $P(-1 < Z < 1) = P(Z < 1) - P(Z < -1)$, logo $P(-1 < Z < 1) = 0,8413 - 0,1587 = 0,6826$
+
+## b)
+
+Sabendo que $X \sim N(100, 10^{2})$, então $\overline{\rm X} \sim (\mu, \frac{\sigma²}{n})$, temos que $\overline{\rm X} \sim (100,\frac{10^{2}}{16})$, logo $P(90 < \overline{\rm X} < 110) = P(\frac{90 - 100}{\frac{10}{\sqrt{16}}} < Z < \frac{110 - 100}{\frac{10}{\sqrt{16}}}) = P(-4 < Z < 4)$, sendo $Z \sim N(0,1)$, temos que $P(-4 < Z < 4) = P(Z < 4) - P(Z < -4)$, logo $P(-4 < Z < 4) ≃ 1,0000 - 0,0000 ≃ 1,000$
+
+## c)
+
+```{r}
+f <- function(x) {dnorm(x, mean = 100, sd = 10)}
+g <- function(x) {dnorm(x, mean = 100, sd = 2.5)}
+
+curve(g, from=50, to=150, ylab = "Densidade")
+curve(f, from=50, to=150, add=TRUE)
+
+```
+## d)
+
+Sabendo que $\overline{\rm X} \sim (\mu, \frac{\sigma²}{n})$, temos que $\overline{\rm X} \sim (100,\frac{10^{2}}{n})$, sendo assim, $P(90 < \overline{\rm X} < 110) = P(\frac{90 - 100}{\frac{10}{\sqrt{n}}} < Z < \frac{110 - 100}{\frac{10}{\sqrt{n}}}) = P(-\sqrt{n} < Z < \sqrt{n})$, e $P(-\sqrt{n} < Z < \sqrt{n}) = P(Z < \sqrt{n}) - P(Z < -\sqrt{n})$, e $P(Z < \sqrt{n}) - P(Z < -\sqrt{n}) = P(Z < \sqrt{n}) - [1 - P(Z < \sqrt{n})] = 2P(Z < \sqrt{n}) - 1$, logo $2P(Z < \sqrt{n}) - 1 = 0,95 => P(Z < \sqrt{n}) = \frac{1,95}{2} = 0,975$, sendo $Z \sim N(0,1)$, pela tabela $P(Z < 1,96) = 0,975$, então $\sqrt{n} = 1,96 => n = 1,96² = 3,842$ 
+
