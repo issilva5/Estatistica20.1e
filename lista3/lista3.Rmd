@@ -1,6 +1,6 @@
 ---
 title: "Lista 3"
-author: "Ítallo Silva - 118110718 | | "
+author: "Ítallo Silva - 118110718 | | Thiago Nascimento - 118110804 | |"
 output: pdf_document
 ---
 
