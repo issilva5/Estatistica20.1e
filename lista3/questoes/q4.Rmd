@@ -1,1 +1,15 @@
 # Questão 4
+
+## a)
+
+Se a máquina está regulada: $\overline{\rm X} \sim N(512,8, \frac{10²}{4})$
+
+Parada desnecessária ocorre quando $\overline{\rm X} < 495$ ou $\overline{\rm X} > 520$, portanto:
+
+$P(\overline{\rm X} < 495$ ou $\overline{\rm X} > 520)$ = $P(Z \leq \frac{495-512,8}{\frac{10}{\sqrt{4}}}) + (1 - P(Z \leq \frac{520-512,8}{\frac{10}{\sqrt{4}}}))$ = $P(Z < -3,56) + (1 - P(Z < 1,44))$ = $0,002 + 0,0749 = 0,0751 = 7,51\%$
+
+## b)
+
+Se o peso médio desregulou-se para 500g $\overline{\rm X} \sim N(500, \frac{10²}{4})$.
+
+P(continuar fora dos padrões) = $P(495 \leq \overline{\rm X} \leq 520)$ = $P(Z \leq \frac{520-500}{\frac{10}{\sqrt{4}}})$ - $P(Z \leq \frac{495-500}{\frac{10}{\sqrt{4}}}))$ = $P(Z < 4) - P(Z < -1) = 1 - 0,1587 = 0,8413 = 84,13\%$
