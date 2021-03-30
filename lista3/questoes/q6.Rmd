@@ -1,1 +1,17 @@
 # Questão 6
+
+Vamos considerar uma população em que a proporção de elementos portadores de
+certa característica é p. Logo, podemos definir uma v.a. X, da seguinte maneira:
+
+X = 1, se o indíviduo for portador da característica,
+    0, se o indívdiuo não for portador da característica
+    
+Logo, 
+
+$\mu = E(X) = p$ , $\sigma^2 = Var(X) = p(1 - p)$
+
+Aplicando o Teorema Central do Limite:
+
+Quando X1, . . . , Xn é uma amostra aleatória simples retirada de uma população $X \sim Ber(p)$ cuja média é, portanto, $E(X) = \mu = p$ e variância $Var(X) = \sigma^2 = p(1 - p)$ com 0 < p < 1; a distribuição amostral da proporção de sucessos $\overline{P}$ aproxima-se para n grande de uma distribuição normal:
+
+$\overline{P} \sim N(p, \frac{p(1-p)}{n}$, para n suficientemente grande.
