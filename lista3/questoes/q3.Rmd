@@ -2,8 +2,8 @@
 
 ## a)
 
-Sendo $X \sim N(\mu, 10²)$, temos que $P(x < 500) = P(\frac{x - \mu}{10} < \frac{500 - \mu}{10}) = P(z < \frac{500 - \mu}{10}))$, sendo $Z \sim N(0,1)$, então $P(z < \frac{500 - \mu}{10}) = 0,1$, pela tabela temos que $P(z < -1,28) ≃ 0,1$, logo $\frac{500 - \mu}{10} = -1,28 => -\mu = -12,8 - 500 => \mu = 512,8g$
+Sendo $X \sim N(\mu; 10^2)$, temos que $P(x < 500) = P(\frac{x - \mu}{10} < \frac{500 - \mu}{10}) = P(z < \frac{500 - \mu}{10}))$, sendo $Z \sim N(0;1)$, então $P(z < \frac{500 - \mu}{10}) = 0,1$, pela tabela temos que $P(z < -1,28) \simeq 0,1$, logo $\frac{500 - \mu}{10} = -1,28 \rightarrow -\mu = -12,8 - 500 \rightarrow \mu = 512,8g$
 
 ## b)
 
-Sabendo que $X \sim N(\512,8, 10²)$, então $\overline{\rm X} \sim N(512,8, \frac{10²}{4})$, sendo assim, $P(\overline{\rm X} \leq 500) = P(Z \leq \frac{500-512,8}{\frac{10}{\sqrt{4}}}) = P(Z < -2,56) = 0,0052$
+Sabendo que $X \sim N(512,8; 10^2)$, então $\overline{\rm X} \sim N(512,8; \frac{10^2}{4})$, sendo assim, $P(\overline{\rm X} \leq 500) = P(Z \leq \frac{500-512,8}{\frac{10}{\sqrt{4}}}) = P(Z < -2,56) = 0,0052$
