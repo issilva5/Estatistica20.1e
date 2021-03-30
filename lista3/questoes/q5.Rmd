@@ -2,12 +2,12 @@
 
 ## a)
 
-$\overline{\rm X} \sim N(70, \frac{10²}{7})$ 
+$\overline{\rm X} \sim N(70; \frac{10^2}{7})$ 
 
 $P(\sum\limits_{i=1}^{7} X_i > 500)$ = $P(\overline{\rm X} > \frac{500}{7})$ = $1 - P(Z < \frac{\frac{500}{7} - 70}{\frac{10}{\sqrt{7}}})$ = $1 - P(Z < 0,38)$ = $1 - 0,6480 = 0,352 = 35,2\%$
 
 ## b)
 
-$\overline{\rm X} \sim N(70, \frac{10²}{6})$ 
+$\overline{\rm X} \sim N(70; \frac{10^2}{6})$ 
 
 $P(\sum\limits_{i=1}^{6} X_i > 500)$ = $P(\overline{\rm X} > \frac{500}{6})$ = $1 - P(Z < \frac{\frac{500}{6} - 70}{\frac{10}{\sqrt{6}}})$ = $1 - P(Z < 3,27)$ = $1 - 0,9995 = 0,0005 = 0,05\%$
