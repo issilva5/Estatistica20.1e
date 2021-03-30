@@ -2,8 +2,8 @@
 
 ## a)
 
-Sendo as v.a. de X são independentes e cada v.a. segue a distribuição de probabilidade X, temos que as v.a. são amostras aleatórias simples de X, assim sendo, podemos assumir pelo teorema que $E(\overline{\rm X}) = E(X)$, ou seja, $E(\overline{\rm X})$ = 54 meses
+Sendo as v.a. de X são independentes e cada v.a. segue a distribuição de probabilidade X, temos que as v.a. são amostras aleatórias simples de X, assim sendo, podemos assumir pelo teorema que $E(\overline{\rm X}) = E(X)$, ou seja, $E(\overline{\rm X}) = 54$ meses
 
 ## b)
 
-Uma vez que, as v.a. de X constituem uma A.A.S. e com n = 50, sendo suficientemente grande, podemos assumir pelo TCL que $\overline{\rm X} \sim N(\mu, \frac{\sigma^{2}}{n})$, logo temos que, $P(\overline{\rm X} > 52) = P(Z > \frac{52 - 54}{\frac{6}{\sqrt{50}}}) = P(Z > \frac{-2}{0,8485}) ≃ P(Z > -2,36)$, sabendo que $P(Z > -2,36) = 1 - P(Z < -2,36)$, pela tabela temos que, $P(Z < -2,36) = 0,0091$, então $P(Z > -2,36) = 1 - 0,0091 = 0,9909$. Sendo assim, pela forte probabilidade de uma bateria durar no mínimo 52 meses a afirmação do fabricante de $\mu$ = 54 meses e $\partial$ = 6 meses parece verdadeira.
+Uma vez que, as v.a. de X constituem uma A.A.S. e com n = 50, sendo suficientemente grande, podemos assumir pelo TCL que $\overline{\rm X} \sim N(\mu; \frac{\sigma^{2}}{n})$, logo temos que, $P(\overline{\rm X} > 52) = P(Z > \frac{52 - 54}{\frac{6}{\sqrt{50}}}) = P(Z > \frac{-2}{0,8485}) \simeq P(Z > -2,36)$, sabendo que $P(Z > -2,36) = 1 - P(Z < -2,36)$, pela tabela temos que, $P(Z < -2,36) = 0,0091$, então $P(Z > -2,36) = 1 - 0,0091 = 0,9909$. Sendo assim, pela forte probabilidade de uma bateria durar no mínimo 52 meses a afirmação do fabricante de $\mu$ = 54 meses e $\sigma$ = 6 meses parece verdadeira.
