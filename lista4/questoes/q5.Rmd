@@ -1,1 +1,60 @@
+# Questão 5
 
+Nosso conjunto de dados, é o seguinte:
+
+```{r}
+dados <- c(2.9, 3.4, 3.5, 4.1, 4.6, 4.7, 4.5, 3.8, 5.3, 4.9, 
+           4.8, 5.7, 5.8, 5.0, 3.4, 5.9, 6.3, 4.6, 5.5, 6.2)
+
+tempo_medio <- mean(dados)
+desvio_padrao_tempo <- sd(dados)
+```
+
+Temos uma média amostral de `r tempo_medio` e um desvio padrão amostral de `r desvio_padrao_tempo`.
+
+## a)
+
+Queremos um intervalo de 95% de confiança. Calculemos então o erro $\epsilon = t_{\alpha}\frac{S}{\sqrt{n}}$. Temos que $S =$ `r desvio_padrao_tempo` e $n =$ `r length(dados)`. Precisamos então descobrir o $t_{\alpha}$.
+
+Sabemos que $\alpha = 1 - \gamma \rightarrow \alpha = 1 - 0.95 = 0.05$ e que $gl = n - 1 \rightarrow gl = 20 - 1 = 19$. Assim, vamos olhar na tabela da distribuição t-Student. Assim $t_{\alpha} = 2,093$. Logo:
+
+$\epsilon = 2,093\frac{0,996}{\sqrt{20}} = 2,093 \cdot 0,2227 = 0,475$.
+
+Sendo assim nosso intervalo é $4,745 \pm 0,475 = [4.27; 5.22]$. Sendo assim, podemos afirmar com 95% de certeza que a média da população está entre $[4.27; 5.22]$. Em outras palavras, em 95% das amostras retiradas o valor da média estará nesse intervalo.
+
+## b)
+
+A seguir definimos uma função para o cálculo do intervalo de confiança para a média.
+
+```{r}
+conf.int <- function(dados, desvio.p = NULL, level = 0.95) {
+  
+  n <- length(dados)
+  q <- level + (1 - level)/2
+  m <- mean(dados)
+  
+  if (is.null(desvio.p)) {
+    
+    dp <- sd(dados)
+    fator.mult <- qt(q, df = n - 1)
+    
+  } else {
+    
+    dp <- desvio.p
+    fator.mult <- qnorm(q)
+    
+  }
+  
+  erro <- fator.mult * dp / sqrt(n)
+  
+  list("limite.inferior" = m - erro, "limite.superior" = m + erro, "erro" = erro)
+  
+}
+```
+
+Temos então aplicando a função:
+```{r}
+conf.int(dados)
+```
+
+Podemos ver que o valor calculado manualmente do calculado pela função foi bem próximo. Sendo a diferença entre os erros (calculado manualmente e pela função igual) à `r abs(0.475 - conf.int(dados)$erro)`.

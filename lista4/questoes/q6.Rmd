@@ -1,1 +1,129 @@
+# Questão 6
+
+```{r message=FALSE}
+library(tidyverse)
+```
+
+A base de dados escolhida para esta questão foi a 'Movies on Streaming Platform'.
+
+```{r warning=FALSE}
+dataset <- read_csv("../MoviesOnStreamingPlatforms_updated.csv", col_types = cols_only(
+  ID = col_integer(),
+  Title = col_character(),
+  Year = col_character(),
+  Age = col_character(),
+  Directors = col_character(),
+  Genres = col_character(),
+  Country = col_character(),
+  Language = col_character(),
+  Runtime = col_double()
+))
+```
+
+Nossa variáveis de interesse serão: **Age** e **Runtime**. Sendo assim, vamos limpar o dataset para garantir que não temos entradas com essas opções faltantes.
+
+```{r}
+dataset <- dataset %>%
+  filter(!is.na(Age) & !is.na(Runtime))
+```
+
+## Runtime - variável continua
+
+## Age - variável dicôtomica
+
+A seguir podemos ver a distribuição dessa variáveis:
+
+```{r}
+dataset %>%
+  ggplot(aes(x = Age)) + 
+  geom_bar(stat = "count", position = "dodge")
+```
+
+Neste problema queremos saber a proporção de filmes 18+, sendo assim iremos transformar a variável **Age** em uma variável dicotômica.
+
+```{r}
+dataset <- dataset %>%
+  mutate(More18 = as.integer(Age == "18+")) %>%
+  select(-Age)
+```
+
+## Amostragem
+
+Utilizaremos uma amostra de 10% do total (`r round(0.10 * nrow(dataset), 0)` filmes) e ao fim determinaremos o erro obtido.
+
+```{r}
+set.seed(475)
+
+tamanho_amostra <- round(0.10 * nrow(dataset), 0)
+
+amostra <- dataset %>% slice_sample(n = tamanho_amostra)
+```
+
+## Intervalo de confiança para a média do Runtime
+
+Comecemos pelo cálculo da duração média do filme.
+
+```{r}
+media_amostral <- mean(amostra$Runtime)
+```
+
+Temos então uma média amostral de `r media_amostral`. Sigamos para o cálculo do erro:
+
+```{r}
+desvio_amostral <- sd(amostra$Runtime)
+t_alpha <- qt(0.975, df = tamanho_amostra - 1)
+erro <- t_alpha * desvio_amostral / sqrt(tamanho_amostra)
+```
+
+Temos um erro de `r erro` minutos. Vamos então calcular o intervalo de confiança:
+
+```{r}
+limite_inferior <- media_amostral - erro
+limite_superior <- media_amostral + erro
+```
+
+Assim, nosso intervalo é $[$`r limite_inferior`$;$`r limite_superior`$]$. Por fim, vamos verificar se a média populacional está contida no intervalo.
+
+```{r}
+media_pop <- mean(dataset$Runtime)
+```
+
+Temos uma média populacional de `r media_pop` e que portanto está contida no nosso intervalo.
+
+## Intervalo de confiança para a proporção de filmes 18+ nas plataformas
+
+Primeiramente, calculemos a proporção na nossa amostra.
+
+```{r}
+p <- nrow(amostra %>% filter(More18 == 1))/nrow(amostra)
+```
+
+Temos que a proporção amostral é de `r p*100`%. Vamos agora calcular o intervalo de confiança.
+
+Comecemos calculando o valor do erro:
+
+```{r}
+var_amostra <- p*(1-p)
+z_gamma <- qnorm(0.975)
+erro <- z_gamma * sqrt(var_amostra/nrow(amostra))
+```
+
+Sendo assim, temos um erro de `r erro*100`%. Agora podemos, calcular o intervalo de confiança.
+
+```{r}
+limite_inferior <- p - erro
+limite_superior <- p + erro
+```
+
+Assim, o intervalo de confiança para a proporção é $[$`r limite_inferior*100`$\%;$`r limite_superior*100`$\%]$. Ou seja, em 95% das amostras obtidas, a proporção estará nesse intervalo.
+
+Verifiquemos se o intervalo é eficaz e contém a proporção real.
+
+```{r}
+p_pop <- nrow(dataset %>% filter(More18 == 1))/nrow(dataset)
+```
+
+Temos que a proporção na população é de `r p_pop*100`%, e que ela está contida no intervalo de confiança.
+
+
 
