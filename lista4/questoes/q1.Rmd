@@ -1,1 +1,17 @@
+# Questão 1
 
+## a)
+É uma ciência que trata da coleta, interpretação, análise e representação de dados númericos. A partir disso, a Estatística consegue transformar dados em conhecimento, sendo assim possível estimar ou prever fenônemos futuros.
+Por exemplo, a partir de uma pesquisa de uma parte da população eleitoral (amostra) é possível estimar, com um certo nível de confiança, qual candidato será vencedor em uma eleição.
+
+## b)
+
+A estatística se divide basicamente em três grandes áreas, que são \textbf{Estatística Descritiva}, \textbf{Estatística Inferencial} e \textbf{Probabilístca}.
+
+\textbf{Estatística Descritiva}: responsável por organizar e resumir os dados obtidos em uma pesquisa ou estudo, de modo a descreve-los de forma adequada.
+Por exemplo, apresentar em um gráfico de pizza a parcela de estudantes do curso de computação que fazem exercício físico semanalmente.
+
+\textbf{Estatística Inferencial}: responsável por analisar os dados de uma amostra e fazer interpretações de forma que as informações geradas possam ser expandidas para a população.
+Por exemplo, a partir da análise dos dados obtidos de uma pesquisa eleitoral, qual a porcentagem de votos um candidato irá obter.
+
+\textbf{Probabilístca}: a teoria de probabilidade permite a descrição de fenômenos aleatórios oriundos das incertezas.
