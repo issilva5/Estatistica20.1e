@@ -57,4 +57,4 @@ Temos então aplicando a função:
 conf.int(dados)
 ```
 
-Podemos ver que o valor calculado manualmente do calculado pela função foi bem próximo. Sendo a diferença entre os erros (calculado manualmente e pela função igual) à `r abs(0.475 - conf.int(dados)$erro)`.
+Podemos ver que o valor calculado manualmente do calculado pela função foi bem próximo. Sendo a diferença entre os erros (calculado manualmente e pela função) igual à `r abs(0.475 - conf.int(dados)$erro)`.
