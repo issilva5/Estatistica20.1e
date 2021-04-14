@@ -1,1 +1,37 @@
+# Questão 2
 
+## a)
+
+Se pretende então calcular o tamanho de uma amostra $n$ e para isso temos que:
+O tamanho da populção é $N = 8311$
+O erro amostral máximo é $\varepsilon = 0,02$
+E com confiança $\gamma = 0,95 \rightarrow z_{\gamma} = 1,96$
+
+Como não conhecemos o valor de $p$ vamos utilizar  $n \geq \frac{z^2}{4\varepsilon^2}$
+
+
+$n \geq \frac{1,96^2}{4(0,02)^2} = 2401$
+
+Portanto, o tamanho da amostra com as restrições requeridas é de $2401$
+
+## b)
+A amostragem estratificada seria mais adequada, pois visto dessa forma é possível manter a representatividade da população, visto que o conjunto populacional é divido nas classes de alunos, professores e servidores.
+
+## c)
+
+Temos que $N = 150$, $\gamma = 0,99 \rightarrow z_{\gamma} = 2,57$ e $\overline{p} = 0,53$, então:
+
+O erro amostral $\varepsilon = z\sqrt{\frac{\overline{p}(1 - \overline{p})}{n}} = 2,57\sqrt{\frac{0,53\ . \ 0,47)}{150}} = 0,1047$
+
+E o intervalo de confiança $IC(p; 99\%) = (0,4253;0,6347)$
+
+Portanto, isso significa que com 99% de confiança e erro amostral de 10,47% a verdadeira proporção de eleitores favoráveis ao candidato está entre 42,53% e 63,47%, ou seja, podemos dizer que 53% favoráveis ao candidato com uma margem de erro de 11% para mais ou para menos.
+
+## d)
+
+A partir do enunciado temos que $N = 150$ e $\overline{p} = 0,63$
+
+Considerando um erro amostral de 5% a probabilidade $z_{\gamma}$ de que pelo menos 63% sejam favoráveis ao candidato é 
+$z = \frac{0,05}{\sqrt{\frac{0,63\ . \ 0,37)}{150}}} = 95\%$
+
+Portanto, considerando esse erro amostral é razoável o candidato fazer a afirmação.
