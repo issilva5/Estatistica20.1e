@@ -2,128 +2,206 @@
 
 ```{r message=FALSE}
 library(tidyverse)
+library(here)
 ```
 
-A base de dados escolhida para esta questão foi a 'Movies on Streaming Platform'.
+## O dataset
+
+O conjunto de dados escolhido para este estudo foi encontrado no [Kaggle](https://www.kaggle.com/rubenssjr/brasilian-houses-to-rent?select=houses_to_rent.csv) e trata do preço de casas para alugar no Brasil. A seguir temos a leitura dos dados.
 
 ```{r warning=FALSE}
-dataset <- read_csv("../MoviesOnStreamingPlatforms_updated.csv", col_types = cols_only(
-  ID = col_integer(),
-  Title = col_character(),
-  Year = col_character(),
-  Age = col_character(),
-  Directors = col_character(),
-  Genres = col_character(),
-  Country = col_character(),
-  Language = col_character(),
-  Runtime = col_double()
+dataset <- read_csv(here("lista4/houses_to_rent_v2.csv"), col_types = cols_only(
+  city = col_character(),
+  area = col_double(),
+  rooms = col_integer(),
+  bathroom = col_integer(),
+  floor = col_integer(),
+  animal = col_character(),
+  furniture = col_character(),
+  `total (R$)` = col_double()
 ))
 ```
 
-Nossa variáveis de interesse serão: **Age** e **Runtime**. Sendo assim, vamos limpar o dataset para garantir que não temos entradas com essas opções faltantes.
+O conjunto tem um total de `r nrow(dataset)` casas e possui 8 *features*, que estão descritas na tabela a seguir:
+
++-------------+-----------+-----------------------------------------------------------------------+
+| Nome        | Tipo      | Descrição                                                             |
++=============+===========+=======================================================================+
+| city        | Caractere | Cidade de localização do imóvel                                       |
++-------------+-----------+-----------------------------------------------------------------------+
+| area        | Real      | Área do imóvel                                                        |
++-------------+-----------+-----------------------------------------------------------------------+
+| rooms       | Inteiro   | Número de quartos do imóvel                                           |
++-------------+-----------+-----------------------------------------------------------------------+
+| bathroom    | Inteiro   | Número de banheiros do imóvel                                         |
++-------------+-----------+-----------------------------------------------------------------------+
+| floor       | Inteiro   | Número de pisos do imóvel                                             |
++-------------+-----------+-----------------------------------------------------------------------+
+| animal      | Binária   | Variável binária indicando se é permitido morar com animais no imóvel |
++-------------+-----------+-----------------------------------------------------------------------+
+| furniture   | Binária   | Variável binária indicando se a casa é mobiliada ou não               |
++-------------+-----------+-----------------------------------------------------------------------+
+| total (R\$) | Real      | Valor do aluguel em reais                                             |
++-------------+-----------+-----------------------------------------------------------------------+
+
+Neste estudo estaremos interessados em estimar dois parâmetros: **média do valor total de aluguel** e **proporção de casas disponíveis mobiliadas**. Iniciaremos realizando algumas manipulações nos dados para simplificar nossa análise no futuro.
+
+Primeiramente, vamos mudar a *feature* forniture que atualmente é representada por caracteres para uma representação em 0 ou 1. Onde 0 indicará que a casa não é mobiliada e 1 que ela é.
 
 ```{r}
+dataset <- dataset %>% mutate(furniture = ifelse(furniture == "furnished", 1, 0))
+
+```
+
+Para facilitar a manipulação iremos mudar o nome da coluna que contém o valor do aluguel de **total (R\$)** para simplesmente **aluguel**.
+
+```{r}
+dataset <- dataset %>% rename(aluguel = "total (R$)")
+```
+
+Vamos então observar se existe algum dado faltante dentre as nossa variáveis de interesse, e se houver iremos remover as linhas em que elas ocorrem.
+
+```{r}
+dataset <- dataset %>% filter(!is.na(furniture) & !is.na(aluguel))
+```
+
+## Valor do aluguel
+
+Inicialmente façamos uma análise descrita da variável. Comecemos observando sua distribuição:
+
+```{r}
+dataset %>% pull(aluguel) %>% summary()
+```
+Podemos ver que os valores variam de 499 a 112000, com uma média de 5490 e mediana de 3582. Façamos um boxplot.
+
+```{r}
+dataset %>% ggplot(aes(y = aluguel)) +
+  geom_boxplot() +
+  theme(axis.line.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.text.x = element_blank()) +
+  labs(y = "Aluguel (R$)",
+       title = "Boxplot do aluguel")
+```
+Pelos boxplot vemos que existem outliers em nossos dados, sendo assim iremos filtrar os dados com base no intervalo interquartil e remover esses dados. E em seguida repetimos o boxplot.
+
+```{r}
+q1 <- quantile(dataset$aluguel, probs = 0.25)
+q3 <- quantile(dataset$aluguel, probs = 0.75)
+iiq <- q3 - q1
+
+lim_inf <- q1 - 1.5 * iiq
+lim_sup <- q3 + 1.5 * iiq
+
 dataset <- dataset %>%
-  filter(!is.na(Age) & !is.na(Runtime))
+  filter(aluguel >= lim_inf & aluguel <= lim_sup)
 ```
 
-## Runtime - variável continua
-
-## Age - variável dicôtomica
-
-A seguir podemos ver a distribuição dessa variáveis:
+Vamos rever a distribuição dos dados.
 
 ```{r}
-dataset %>%
-  ggplot(aes(x = Age)) + 
-  geom_bar(stat = "count", position = "dodge")
+dataset %>% pull(aluguel) %>% summary()
+```
+Podemos ver que nosso valor máximo foi bastante reduzido. Vejamos mais uma vez o boxplot.
+
+```{r}
+dataset %>% ggplot(aes(y = aluguel)) +
+  geom_boxplot() +
+  theme(axis.line.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.text.x = element_blank()) +
+  labs(y = "Aluguel (R$)",
+       title = "Boxplot do aluguel")
+```
+Vemos que ainda existem dados considerados outliers entretanto seus valores são significativas menores que os anteriores, e portanto eles serão considerados como válidos.
+
+## Variável binária - imóvel mobiliada
+
+Como é uma variável binária, vejamos sua distribuição.
+
+```{r}
+dataset %>% ggplot(aes(x = as.factor(furniture))) +
+  geom_bar(stat = "count", position = "dodge") +
+  labs(title = "Distribuição da variável",
+       y = "Quantidade",
+       x = "É mobiliada?")
 ```
 
-Neste problema queremos saber a proporção de filmes 18+, sendo assim iremos transformar a variável **Age** em uma variável dicotômica.
+Vemos uma predominância de imóveis não-mobiliados, calculemos então as proporções:
 
 ```{r}
-dataset <- dataset %>%
-  mutate(More18 = as.integer(Age == "18+")) %>%
-  select(-Age)
+p_mobiliada <- nrow(dataset %>% filter(furniture == 1))/nrow(dataset)
+p_nao_mobiliada <- 1 - p_mobiliada
 ```
 
-## Amostragem
+Temos um total de `r p_mobiliada*100`% de imóveis mobiliados e `r p_nao_mobiliada*100`% de imóveis não mobiliados.
 
-Utilizaremos uma amostra de 10% do total (`r round(0.10 * nrow(dataset), 0)` filmes) e ao fim determinaremos o erro obtido.
+## Realizando uma amostragem no dataset
+
+Para realizar nossa estimativa, iremos coletar uma amostra de 10% do dataset.
 
 ```{r}
-set.seed(475)
-
-tamanho_amostra <- round(0.10 * nrow(dataset), 0)
-
+set.seed(4757)
+tamanho_amostra <- round(nrow(dataset) * 0.1)
 amostra <- dataset %>% slice_sample(n = tamanho_amostra)
 ```
 
-## Intervalo de confiança para a média do Runtime
+## Cálculo da estimativa intervalar da média do aluguel
 
-Comecemos pelo cálculo da duração média do filme.
-
-```{r}
-media_amostral <- mean(amostra$Runtime)
-```
-
-Temos então uma média amostral de `r media_amostral`. Sigamos para o cálculo do erro:
+Iniciemos com o cálculo da média da amostra.
 
 ```{r}
-desvio_amostral <- sd(amostra$Runtime)
-t_alpha <- qt(0.975, df = tamanho_amostra - 1)
-erro <- t_alpha * desvio_amostral / sqrt(tamanho_amostra)
+media_amostra <- mean(amostra$aluguel)
 ```
 
-Temos um erro de `r erro` minutos. Vamos então calcular o intervalo de confiança:
+Obtemos então o desvio padrão da população, considerando o dataset por completo.
 
 ```{r}
-limite_inferior <- media_amostral - erro
-limite_superior <- media_amostral + erro
+desvio_padrao_pop <- sd(dataset$aluguel)
 ```
 
-Assim, nosso intervalo é $[$`r limite_inferior`$;$`r limite_superior`$]$. Por fim, vamos verificar se a média populacional está contida no intervalo.
+Calculemos então o erro, considerando o intervalo de 95% de confiança.
 
 ```{r}
-media_pop <- mean(dataset$Runtime)
+z_gamma <- qnorm(0.975) # Z_gamma para 95% de confiança
+erro <- z_gamma * desvio_padrao_pop / sqrt(nrow(amostra))
 ```
 
-Temos uma média populacional de `r media_pop` e que portanto está contida no nosso intervalo.
-
-## Intervalo de confiança para a proporção de filmes 18+ nas plataformas
-
-Primeiramente, calculemos a proporção na nossa amostra.
+Temos então um erro de R$ `r erro`, calculemos os limites do intervalo.
 
 ```{r}
-p <- nrow(amostra %>% filter(More18 == 1))/nrow(amostra)
+lim_inf <- media_amostra - erro
+lim_sup <- media_amostra + erro
 ```
 
-Temos que a proporção amostral é de `r p*100`%. Vamos agora calcular o intervalo de confiança.
-
-Comecemos calculando o valor do erro:
+Assim nossa estimativa intervalar é $[$`r lim_inf`$;$`r lim_sup`$]$. Calculemos a média da população para verificar se ela está contida no intervalo:
 
 ```{r}
-var_amostra <- p*(1-p)
-z_gamma <- qnorm(0.975)
-erro <- z_gamma * sqrt(var_amostra/nrow(amostra))
+media_pop <- mean(dataset$aluguel)
 ```
 
-Sendo assim, temos um erro de `r erro*100`%. Agora podemos, calcular o intervalo de confiança.
+Temos que a média da população é de R$ `r media_pop` e que ela está contida no intervalo. Isso era esperado uma vez que como o valor de confiança é de 95%, temos uma probabilidade 95% da média está contida nele. Isso torna a nossa estimativa uma boa estimativa para a média do aluguel.
+
+## Cálculo da estimativa da proporção da casas mobiliadas nos dados
+
+Comecemos calculando a proporção na nossa amostra.
 
 ```{r}
-limite_inferior <- p - erro
-limite_superior <- p + erro
+p_mob_amostra <- nrow(amostra %>% filter(furniture == 1))/nrow(amostra)
 ```
 
-Assim, o intervalo de confiança para a proporção é $[$`r limite_inferior*100`$\%;$`r limite_superior*100`$\%]$. Ou seja, em 95% das amostras obtidas, a proporção estará nesse intervalo.
-
-Verifiquemos se o intervalo é eficaz e contém a proporção real.
+Sigamos então para o cálculo do erro.
 
 ```{r}
-p_pop <- nrow(dataset %>% filter(More18 == 1))/nrow(dataset)
+z_gamma <- qnorm(0.975) # Z_gamma para 95% de confiança
+erro <- z_gamma * sqrt((p_mob_amostra * (1 - p_mob_amostra))/nrow(amostra))
 ```
 
-Temos que a proporção na população é de `r p_pop*100`%, e que ela está contida no intervalo de confiança.
+Definamos o intervalo de confiança:
 
+```{r}
+lim_inf <- p_mob_amostra - erro
+lim_sup <- p_mob_amostra + erro
+```
 
-
+Assim nosso intervalo é de $[$`r lim_inf*100`$\%;$`r lim_sup*100`$\%]$. Temos que a proporção na população é de `r p_mobiliada*100`% e que ela está contida no intervalo. Pelo mesmo fator citado na análise da média.s
