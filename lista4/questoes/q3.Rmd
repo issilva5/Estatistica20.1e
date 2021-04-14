@@ -2,8 +2,8 @@
 
 ## a)
 
-Sabendo que $X \sim N(348, 50²)$ e os reservatórios tem 350000 $m³$ por dia, em uma cidade com 1000 famílias temos que a cidade comporta 350 $m³$ por familia/dia. Sendo assim, a probabilidade da capacidade ser ultrapassada é $P(X > 350) = 1 - P(X < 350) = 1 - P(Z < \frac{350 - 348}{50}) = 1 - P(Z < 0,04)$. Sendo $Z \sim N(0, 1)$, então $ 1 - P(Z < 0,04) = 1 - 0,5160 = 0,484$. Logo, a chance de ultrapassar o limite é de 48,4%, sendo assim relativamente preocupante.
+Sabendo que $X \sim N(348, 50^2)$ e os reservatórios tem 350000 $m^3$ por dia, em uma cidade com 1000 famílias temos que a cidade comporta 350 $m^3$ por familia/dia. Sendo assim, a probabilidade da capacidade ser ultrapassada é $P(X > 350) = 1 - P(X < 350) = 1 - P(Z < \frac{350 - 348}{50}) = 1 - P(Z < 0,04)$. Sendo $Z \sim N(0, 1)$, então $1 - P(Z < 0,04) = 1 - 0,5160 = 0,484$. Logo, a chance de ultrapassar o limite é de 48,4%, sendo assim relativamente preocupante.
 
 ## b)
 
-Sabendo que $X \sim N(348, 50²)$ e a capacidade c = 1000 familias * x $m³$ por familia/dia. Com isso $P(X > x) = P(Z > \frac{x - 348}{50}) = P(Z > z) = 1 - P(Z < z)$. Sendo $Z \sim N(0, 1)$, então $P(Z < z) = 1 - 0,005 = 0,995$ e $z ≃ 2,58$, temos assim que $z = 2,58 => \frac{x - 348}{50} = 2,58 => x = 477$. Sendo assim, a capacidade precisa ser c = 1000 * 477 = 477000 $m³$ por dia.
+Sabendo que $X \sim N(348, 50^2)$ e a capacidade c = 1000 familias * x $m^3$ por familia/dia. Com isso $P(X > x) = P(Z > \frac{x - 348}{50}) = P(Z > z) = 1 - P(Z < z)$. Sendo $Z \sim N(0, 1)$, então $P(Z < z) = 1 - 0,005 = 0,995$ e $z \simeq 2,58$, temos assim que $z = 2,58 \rightarrow \frac{x - 348}{50} = 2,58 \rightarrow x = 477$. Sendo assim, a capacidade precisa ser c = 1000 * 477 = 477000 $m^3$ por dia.

@@ -25,7 +25,7 @@ O erro amostral $\varepsilon = z\sqrt{\frac{\overline{p}(1 - \overline{p})}{n}} 
 
 E o intervalo de confiança $IC(p; 99\%) = (0,4253;0,6347)$
 
-Portanto, isso significa que com 99% de confiança e erro amostral de 10,47% a verdadeira proporção de eleitores favoráveis ao candidato está entre 42,53% e 63,47%, ou seja, podemos dizer que 53% favoráveis ao candidato com uma margem de erro de 11% para mais ou para menos.
+Portanto, isso significa que com 99% de confiança e erro amostral de 10,47% a verdadeira proporção de eleitores favoráveis ao candidato está entre 42,53% e 63,47%, ou seja, podemos dizer que 53% dos eleitores são favoráveis ao candidato, com uma margem de erro de 11% para mais ou para menos.
 
 ## d)
 
