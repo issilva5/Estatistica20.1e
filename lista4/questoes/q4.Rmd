@@ -1,1 +1,31 @@
+# Questão 4
 
+## a)
+
+Sabendo que $\gamma = 0,95$ e $\overline{\rm p} = \frac{10}{30} = 0,333$, então temos que $\overline{\rm p} \pm \epsilon$, sendo $\epsilon = z_{\gamma}\sqrt{\frac{\overline{\rm p}(1 - \overline{\rm p})}{n}} = 1,96\sqrt{\frac{0,333 * 0,666}{30}} ≃ 0,168$. Logo o IC = [0,333 - 0,168; 0,333 + 0,168] = [0,165; 0,501]. Sendo assim, a medida se mostrou válida, uma vez que, a proporção anteriormente de 60% caiu para entre 16,5% e 50,1%.
+
+## b)
+
+Sendo,
+
+```{r}
+ocorrencias_30 = c(7, 11, 8, 9, 10, 14, 6, 8, 8, 7, 8, 10, 10, 14, 12, 14, 12, 9, 11, 13, 13, 8, 6, 8, 13, 10, 14, 5, 14, 10)
+
+num_dia = length(ocorrencias_30)
+
+dias_violento = which(ocorrencias_30 >= 12)
+
+num_dia_violento = length(dias_violento)
+
+proporcao = num_dia_violento/num_dia
+```
+
+$\overline{\rm p}$ = `r proporcao` e $\gamma = 0,95$, então temos que $\overline{\rm p} \pm \epsilon$, sendo $\epsilon = z_{\gamma}\sqrt{\frac{\overline{\rm p}(1 - \overline{\rm p})}{n}}$
+
+```{r}
+erro = qnorm(0.975) * sqrt((proporcao * (1 - proporcao))/num_dia)
+
+IC = c(proporcao - erro, proporcao + erro)
+```
+
+Logo temos que o intervalo de confiança, com 95% de confiança, está entre `r IC[1] * 100`% e `r IC[2] * 100`%.
