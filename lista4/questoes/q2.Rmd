@@ -29,9 +29,16 @@ Portanto, isso significa que com 99% de confiança e erro amostral de 10,47% a v
 
 ## d)
 
-A partir do enunciado temos que $N = 150$ e $\overline{p} = 0,63$
+Utilizando o Teorema Central do Limite e considerando as informações do problema, temos que:
 
-Considerando um erro amostral de 5% a probabilidade $z_{\gamma}$ de que pelo menos 63% sejam favoráveis ao candidato é 
-$z = \frac{0,05}{\sqrt{\frac{0,63\ . \ 0,37)}{150}}} = 95\%$
+$\overline{p} \sim N(0,53; \frac{0,53 \ . \ 0,47}{150}$
 
-Portanto, considerando esse erro amostral é razoável o candidato fazer a afirmação.
+E a probabilidade de que em uma nova pesquisa o candidato tenha pelo menos 63% das intenções de voto é dada por:
+
+$P(\overline{p} \geq 0,63) = P(Z \geq \frac{0,63 - 0,53}{\frac{\sqrt{0,2491}}{\sqrt{150}}}) = $
+
+
+$ = P(Z \geq \frac{0,1}{\frac{0,4991}{\sqrt{150}}}) = P(Z \geq 0,04)}) = 1 - P(Z < 0,04) = 1 - 0,5160 = 0,48$
+
+Como a probabilidade é de 48%, não é razoável o candidato fazer a afirmação.
+
