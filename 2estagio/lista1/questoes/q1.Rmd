@@ -1,1 +1,5 @@
+# Questão 1
 
+Um teste de hipótese é uma técnica estatística que nos ajuda na tomada de decisão sobre uma determinada característica de uma população com base em uma amostra desta. Nele formulamos duas hipóteses, que devem ser mutuamente exclusivas, sobre a característica estudada: hipótese nula e hipótese alternativa. Com base nos valores amostrais da característica, tentamos encontrar evidências que comprovem ou rechacem a hipótese nula, neste último caso comprovando a hipótese alternativa.
+
+Por exemplo, desejamos testar se o tempo de resposta de um novo medicamento é inferior ao de outro que já se encontra no mercado. Podemos investigar isso através do tempo médio de resposta. Formulamos então as hipóteses nula e alternativa, respectivamente: o tempo médio do novo medicamento é maior ou igual ao do antigo e o tempo médio do novo medicamento é menor que o do antigo. E utilizando técnicas estatísticas tomamos uma decisão, considerando um certo nível de confiança.

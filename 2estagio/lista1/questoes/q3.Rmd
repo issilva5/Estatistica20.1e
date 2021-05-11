@@ -1,1 +1,9 @@
+# Questão 3
 
+( 2 ) Chega-se à conclusão por não-rejeitar a hipótese nula ($H_0$).
+
+( 4 ) Rejeita-se a hipótese nula para qualquer nível de significância maior que 0,034; por exemplo: $\alpha = 0,05$.
+
+( 1 ) Deve-se rejeitar a hipótese nula ($H_0$).
+
+( 3 ) Diz-se que o teste é altamente significativo pelo fato de que qualquer nível de significância, $\alpha$, já ser suficientemente maior que o valor p ou; de outra forma; o valor p é tão pequeno que o mesmo será suficientemente menor que qualquer nível de significância $\alpha$ adotado, mesmo que este seja pequeno. Neste caso a hipótese nula deve ser rejeitada com forte evidência estatística (fornecida pelos dados).

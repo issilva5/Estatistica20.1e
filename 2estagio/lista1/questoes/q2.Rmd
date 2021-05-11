@@ -1,1 +1,11 @@
+# Questão 2
 
+( 2 ) Probabilidade de Rejeitar a Hipótese nula ($H_0$) quando a mesma é verdadeira.
+
+( 4 ) Não rejeitar a Hipótese nula ($H_0$) quando a mesma é falsa.
+
+( 5 ) Probabilidade de Rejeitar a Hipótese nula ($H_0$) quando esta é de fato falsa.
+
+( 3 ) Valor p ou Nível descritivo do Teste ($\hat{\alpha}$).
+
+( 1 ) Rejeitar a Hipótese nula ($H_0$) quando a mesma é verdadeira.

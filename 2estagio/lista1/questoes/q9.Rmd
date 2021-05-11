@@ -1,1 +1,18 @@
+# Questão 9
 
+```{r echo=FALSE, message=FALSE}
+library(tidyverse)
+library(readxl)
+```
+
+## Leitura dos dados
+
+```{r}
+amamentacao_dataset <- read_xlsx('../02_Dados_Amamentacao_Cancer_para_Exportar.xlsx')
+head(amamentacao_dataset)
+```
+
+Vemos que existem três colunas: id, cancer e amamentacao. A primeira indica o id da observação, a segunda é uma variável binária indicando a ocorrência de câncer (1) ou não (0), a terceira é também uma variável binária indicando se a mulher foi amamentada pela mãe (1) ou não (0).
+
+https://data-flair.training/blogs/chi-square-test-in-r/
+http://www.sthda.com/english/wiki/chi-square-goodness-of-fit-test-in-r
