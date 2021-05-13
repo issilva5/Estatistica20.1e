@@ -1,1 +1,31 @@
+# Questão 8
 
+Sabendo que as hipóteses:
+
+$H_0:$  os dados provêm de uma distribuição normal
+$H_1:$  os dados não têm distribuição normal
+
+Os dados sendo:
+
+```{r}
+dados = c(2.9, 3.4, 3.5, 4.1, 4.6, 4.7, 4.5, 3.8, 5.3, 4.9, 4.8, 5.7, 5.8, 5.0, 3.4, 5.9, 6.3, 4.6, 5.5, 6.2)
+```
+Temos que o gráfico se mostra:
+
+```{r}
+hist(dados, xlab="Dados", ylab="Frequência", main="Histograma")
+```
+
+Além disso, podemos plotar de formar mais evidente a existência de normalidade através do Q-Q plot.
+
+```{r}
+qqnorm(dados, pch = 1, frame = FALSE, main="Reta normal", xlab="Quantil", ylab="Valores")
+qqline(dados, col = "steelblue", lwd = 2)
+```
+
+O histograma em formato similar ao de um sino e o grande número de pontos próximos a reta de 45º do Q-Q plot aponta para a existência de normalidade, mas é preciso testarmos para sua confirmação:
+
+```{r}
+shapiro.test(dados)
+```
+O p-valor foi de 0.5986. Sendo assim, quer dizer que que há forte indicio de que os dados são normais, pois não diferem de uma curva normal. 
