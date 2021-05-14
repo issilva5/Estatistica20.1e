@@ -1,1 +1,35 @@
+# Questão 7
+
+Temos que, as hipóteses se configuram como:
+
+$H_0: \mu \geq 5$  
+$H_1: \mu < 5$
+
+Os dados sendo:
+
+```{r}
+dados = c(2.9, 3.4, 3.5, 4.1, 4.6, 4.7, 4.5, 3.8, 5.3, 4.9, 4.8, 5.7, 5.8, 5.0, 3.4, 5.9, 6.3, 4.6, 5.5, 6.2)
+```
+
+i) Podemos calcular o valor de $p$ através de:
+
+```{r}
+mu_a = mean(dados)
+sd_a = sd(dados)
+
+t_obs = (mu_a - 5)/(sd_a / sqrt(length(dados)))
+
+p_value = pt(t_obs, length(dados) - 1)
+
+p_value
+```
+
+ii) Com auxílio de funções R, podemos calcular $p$ através de:
+
+```{r}
+t.test(dados, alternative = "less", var.equal=TRUE, mu=5)
+```
+Sendo assim, temos que, o valor $p$ é relativamente alto, logo caso seja superior ao nível de significância, não rejeitamos $H_0$.
+
+iii) Uma vez que $p = 0.1332$, com nível de significância de 5%, temos que $p$ > 5%, podemos afirmar com forte indicio a não rejeição de $H_0$. Com nível de significância de 1%, a condição $p$ > 1%, permace e ainda podemos afirmar com forte indicio a não rejeição $H_0$. De forma geral, os resultados não pareciam evidentes, principalmente pelo fato da $\bar{x}$ ser inferior a 5.
 
