@@ -1,23 +1,20 @@
 # Questão 6
 
-## a)
-
 O teste de hipótese se baseia na afirmação que o candidato A possui mais de 53% dos eleitores favoráveis a ele. Dessa forma as hipóteses que temos são:
 
 $H_0: p \leq 0,53$
-$H_0: p <  0,53$
+$H_1: p > 0,53$
 
 Pelo enunciado temos que:
 
-$n = 150$
-$\overline{p} = 0,63$
+$n = 150$, $\overline{p} = 0,63$
 
 Sendo assim:
 
-$z_{obs} = \frac{\overline{p} \ - \ p}{\sqrt{\frac{p \ (1 \ - \ p)}{n}}} = \frac{0,63 \ - \ 0,53}{\sqrt{\frac{0,53 \ * \ 0,47}{150}}} = 2,45$
+$$z_{obs} = \frac{\overline{p} \ - \ p}{\sqrt{\frac{p \ (1 \ - \ p)}{n}}} = \frac{0,63 \ - \ 0,53}{\sqrt{\frac{0,53 \ * \ 0,47}{150}}} = 2,45$$
 
-Calculando o valor-p $\alpha$:
+Calculando o valor-p:
 
-$\alpha = P(Z > 2,45) = 1 - P(Z < 2,45) = 1 - 0,9929 = 0,0071 = 0,71\%$
+$\hat{\alpha} = P(Z > 2,45) = 1 - P(Z < 2,45) = 1 - 0,9929 = 0,0071 = 0,71\%$
 
 Sendo o valor-p igual a 0,71%, para níveis de significância acima dessa porcentagem há evidências que é possível fazer a afirmação do candidato A. E podemos dizer que o teste é altamente significativo.

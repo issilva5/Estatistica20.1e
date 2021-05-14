@@ -9,21 +9,18 @@ $H_1: p < 0,6$
 
 Pelo enunciado temos:
 
-$\overline{p} = 0,33$
-$n = 30$
+$\overline{p} = 0,33$, $n = 30$
 
-$z_{obs} = \frac{\overline{p} \ - \ p}{\sqrt{\frac{p \ (1 \ - \ p)}{n}}} = \frac{0,33 \ - \ 0,6}{\sqrt{\frac{0,6 \ * \ 0,4}{30}}} = \frac{-0,27}{\sqrt{\frac{0,24}{30}}} = -3,03$
+$$z_{obs} = \frac{\overline{p} \ - \ p}{\sqrt{\frac{p \ (1 \ - \ p)}{n}}} = \frac{0,33 \ - \ 0,6}{\sqrt{\frac{0,6 \ * \ 0,4}{30}}} = \frac{-0,27}{\sqrt{\frac{0,24}{30}}} = -3,03$$
 
-Para 1% $\alpha = 0,01$ de significância, temos pela tabela normal o valor crítico $z_c = -2,33$ e o intervalo da região crítica $RC = (-\infty;-2,33]$.
-Como $z_{obs} \in RC$ rejeitamos $H_0$, e concluimos que para esse nível de significância há evidências de que o plano emergencial surtiu efeito positivo.
+Para o nível de significância de 1%, ou seja, $\alpha = 0,01$, temos pela tabela normal o valor crítico $z_c = -2,33$ e o intervalo da região crítica $RC = (-\infty;-2,33]$. Como $z_{obs} \in RC$ rejeitamos $H_0$, e concluimos que para esse nível de significância há evidências de que o plano emergencial surtiu efeito positivo.
 
-Para 5% $\alpha = 0,05$ de significância, temos pela tabela normal o valor crítico $z_c = -1,64$ e o intervalo da região crítica $RC = (-\infty;-1,64]$.
-Como $z_{obs} \in RC$ rejeitamos $H_0$, e concluimos que para esse nível de significância há evidências de que o plano emergencial surtiu efeito positivo.
+
+Para o nível de significância de 5%, ou seja, $\alpha = 0,05$, temos pela tabela normal o valor crítico $z_c = -1,64$ e o intervalo da região crítica $RC = (-\infty;-1,64]$. Como $z_{obs} \in RC$ rejeitamos $H_0$, e concluimos que para esse nível de significância há evidências de que o plano emergencial surtiu efeito positivo.
 
 ## b)
 
-Sendo $\alpha$ o valor-p, temos que $\overline{\alpha} = P(Z < -3,03)$, e pela tabela de distribuição normal $\overline{\alpha} = 0,0012$.
-Para qualquer nível de significância acima de 0,12% há evidências que permite concluir que o plano surtiu efeito positivo. E sendo o valor-p muito pequeno podemos considerar que o teste é altamente significativo.
+Sendo $\hat{\alpha}$ o valor-p, temos que $\hat{\alpha} = P(Z < -3,03)$, e pela tabela de distribuição normal $\hat{\alpha} = 0,0012$. Assim, para qualquer nível de significância acima de 0,12% há evidências que permite concluir que o plano surtiu efeito positivo. E sendo o valor-p muito pequeno podemos considerar que o teste é altamente significativo.
 
 ## c)
 
@@ -32,14 +29,8 @@ number_success = 10
 tam_amostra = 30
 
 #Teste para 5% de significancia
-prop.test(x = number_success, n = 30, p = 0.6, alternative = "less", conf.level = 0.95, correct = FALSE)
+prop.test(x = number_success, n = 30, p = 0.6, alternative = "less", correct = FALSE)
 
 ```
-```{r}
-number_success = 10
-tam_amostra = 30
 
-#Teste para 1% de significancia
-prop.test(x = number_success, n = 30, p = 0.6, alternative = "less", conf.level = 0.99, correct = FALSE)
-```
-
+Vemos que o valor do valor-p bem próximo ao obtido manualmente, assim reforçando a conclusão do item anterior.
