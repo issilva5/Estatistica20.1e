@@ -14,5 +14,61 @@ head(amamentacao_dataset)
 
 Vemos que existem três colunas: id, cancer e amamentacao. A primeira indica o id da observação, a segunda é uma variável binária indicando a ocorrência de câncer (1) ou não (0), a terceira é também uma variável binária indicando se a mulher foi amamentada pela mãe (1) ou não (0).
 
+## O teste de hipótese
+
+Deseja-se investigar se o fato de ter sido amamentada pela mãe é um fator de proteção para o câncer de mama. Para tanto, seja $p_a$ a proporção de mulheres com câncer dentre as foram amamentadas e $p_{na}$ a proporção de mulheres com câncer dentre as que não foram amamentadas. Vale ressaltar que ambas as populações são independentes.
+
+Podemos então formular as hipóteses:
+
+$$H_0: p_a = p_{na} \rightarrow H_0:p_a - p_{na} = 0$$
+$$H_1: p_a \neq p_{na} \rightarrow H_1:p_a - p_{na} \neq 0$$
+Separando as populações, temos:
+
+```{r}
+pop_ama <- amamentacao_dataset %>% filter(amamentacao == 1) %>% pull(cancer)
+
+pop_nama <- amamentacao_dataset %>% filter(amamentacao != 1) %>% pull(cancer)
+```
+
+Temos que as proporções na amostra, que denotaremos por, $\hat{p}_a$ e $\hat{p}_{na}$ são respectivamente dadas por:
+
+```{r}
+p_a <- length(which(pop_ama == 1)) / length(pop_ama)
+p_na <- length(which(pop_nama == 1)) / length(pop_nama)
+```
+
+$\hat{p}_a =$ `r p_a` e $\hat{p}_{na} =$ `r p_na`.
+
+A diferença estimada entre as probabilidades é $\hat{p}_a - \hat{p}_{na} =$ `r p_a - p_na`, e o desvio padrão é dado por:
+
+$$\sigma(\hat{p}_a - \hat{p}_{na}) = \sqrt{\frac{0.44 \times 0.56}{802} + \frac{0.534 \times 0.466}{328}} = 0,033$$
+
+Calculemos então o $z_{obs}$, para tanto precisamos da proporção total da amostra, daqueles que tiveram câncer:
+
+$$
+\hat{p} = \frac{353 + 175}{802 + 328} = \frac{528}{1130} = 0.467
+$$
+
+E então o $z_{obs}$:
+
+$$
+z_{obs} = \frac{0.44 - 0.534}{\sqrt{0.467(1 - 0.467)\Big[\frac{1}{802} + \frac{1}{328}\Big]}} = -2.875
+$$
+
+Para encontrar o p-value, como é um teste bilateral procuraremos pela probabilidade $2P(Z \geq |z|) = 2P(Z \geq 2.875)$, calculemos:
+
+```{r}
+p.value <- 2 * (1 - pnorm(2.875))
+```
+
+Temos então que um valor p de $0,004$ ou $0,4\%$.
+
+## Usando o teste Chi-Quadrado
+
+```{r}
+chisq.test(amamentacao_dataset$amamentacao, amamentacao_dataset$cancer, correct = FALSE)
+```
+
+
 https://data-flair.training/blogs/chi-square-test-in-r/
 http://www.sthda.com/english/wiki/chi-square-goodness-of-fit-test-in-r
