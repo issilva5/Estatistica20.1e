@@ -61,14 +61,13 @@ Para encontrar o p-value, como é um teste bilateral procuraremos pela probabili
 p.value <- 2 * (1 - pnorm(2.875))
 ```
 
-Temos então que um valor p de $0,004$ ou $0,4\%$.
+Temos então que o valor p é de $0,004$ ou $0,4\%$. Como o p-value encontrado é muito baixo, podemos com certa significância rejeitar a hipótese nula, sendo assim a amostra fornece evidências de que a amamentação protege contra o câncer de mama.
+
+Por fim, vamos utilizar a função pronta do teste Chi-Quadrado para estimar o valor p.
 
 ## Usando o teste Chi-Quadrado
 
 ```{r}
 chisq.test(amamentacao_dataset$amamentacao, amamentacao_dataset$cancer, correct = FALSE)
 ```
-
-
-https://data-flair.training/blogs/chi-square-test-in-r/
-http://www.sthda.com/english/wiki/chi-square-goodness-of-fit-test-in-r
+Como podemos ver, o valor p obtido pelo teste é bem próximo a nossa estimativa manual, assim corroborando nossa rejeição a hipótese nula.
