@@ -1,1 +1,41 @@
+# Questão 4
+
+## a)
+
+Queremos testar a hipótese de que o valor média da característica populacional é igual a 45. Como conhecemos a variância, fazemos o teste de hipóteses com variância conhecida. 
+Temos as seguintes hipóteses:
+
+$$H_0: \mu = 45$$ 
+$$H_1: \mu \neq 45$$ 
+Pelo enunciado temos:
+
+$n = 16 \qquad \overline{x} = 43$
+$\sigma = 6 \qquad \alpha = 0,1$
+
+
+
+$Z_{obs} = \frac{\overline{x} - \mu}{\frac{\sigma}{\sqrt{n}}}$
+
+$Z_{obs} = \frac{43 \ - \ 45}{\frac{6}{\sqrt{16}}}$ $=  -1,34$
+
+Com o $Z_{obs}$ calculado, precisamos achar o intervalo da região crítica.
+Como o teste é bilateral, então o valor crítico é de acordo com $\frac{\alpha}{2} = 0,05$. Pela tabela da distribuição normal, temos que o valor crítico $z_c = -1,64$ e $z_c = 1,64$
+
+O intervalo da região crítica é $RC = (-\infty \ ; \ -1,64] \ \ \cup \ \ [1,64 \ ; \ +\infty)$
+
+Sendo assim, podemos observar que $Z_{obs} \notin RC \ => aceita \ H_0 $. Portanto, ao nível de 10% de signifância há evidências que é possível aceitar a afirmação sobre o valor médio.
+
+
+## b)
+
+Como o teste é bilateral, para encontrar o valor-p $\overline{\alpha}$ temos:
+
+$\frac{\overline{\alpha}}{2} = P(Z < -1,34)$
+
+Utilizando a tabela da distribuição normal, temos:
+$\overline{\alpha} = 2 \ * \ 0,0901 = 0,1802$
+
+Portanto, para níveis de confiança acima de 18,02% conclui-se pela rejeição de $H_0$. Como o valor-p é razoavelmente grande, concluimos que o teste não é significativo.
+
+
 
