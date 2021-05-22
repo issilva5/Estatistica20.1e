@@ -1,0 +1,22 @@
+---
+title: "3º Estágio / Trabalho Avaliativo"
+author: "Ítallo Silva - 118110718 | Thiago Nascimento - 118110804 | João Marcelo Junior - 117110448"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+options(scipen = 10, digits = 4, OutDec = ",")
+```
+
+```{r child = 'questoes/q1.Rmd'}
+```
+
+```{r child = 'questoes/q2.Rmd'}
+```
+
+```{r child = 'questoes/q3.Rmd'}
+```
+
+```{r child = 'questoes/q4.Rmd'}
+```
