@@ -1,1 +1,65 @@
+```{r echo=FALSE}
+library(tidyverse)
+library(mlbench)
+library(corrplot)
+```
+
+## Carregando dados
+
+```{r}
+# dados <- read_csv("../datasets/Houses.csv",
+#                   col_types =
+#                     cols_only(
+#                         id = col_double(),
+#                         floor = col_double(),
+#                         price = col_double(),
+#                         rooms = col_double(),
+#                         sq = col_double(),
+#                         year = col_double()
+#                     ))
+# 
+# set.seed(1223)
+# dados <- sample_n(dados, 5000)
+# dados <- dados %>% mutate(id = row_number())
+
+data("BostonHousing")
+
+dados <- BostonHousing %>% select(-chas)
+
+glimpse(dados)
+```
+
+## Construção do modelo
+
+```{r}
+dados %>% cor() %>% corrplot(type = "upper", order = "hclust", 
+         tl.col = "black", tl.srt = 45)
+```
+
+
+```{r}
+mod <- lm(medv ~ lstat + rm, dados)
+```
+
+## Análise gráfica
+
+```{r}
+plot(mod)
+```
+
+## Normalidade dos resíduos
+
+```{r}
+shapiro.test(mod$residuals)
+```
+
+## Outliers dos residuos
+
+```{r}
+summary(rstandard(mod))
+```
+
+```{r}
+boxplot(dados$price)
+```
 
