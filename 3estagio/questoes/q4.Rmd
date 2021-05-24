@@ -1,65 +1,132 @@
-```{r echo=FALSE}
+# Questão 4
+
+```{r echo=FALSE, message=FALSE}
 library(tidyverse)
-library(mlbench)
-library(corrplot)
 ```
 
-## Carregando dados
+## Carregando os dados
+
+A seguir, fazemos a leitura dos dados, neles encontramos três colunas:
+
+-   faturamento, nossa variável *target*;
+-   pesquisa
+-   propaganda
 
 ```{r}
-# dados <- read_csv("../datasets/Houses.csv",
-#                   col_types =
-#                     cols_only(
-#                         id = col_double(),
-#                         floor = col_double(),
-#                         price = col_double(),
-#                         rooms = col_double(),
-#                         sq = col_double(),
-#                         year = col_double()
-#                     ))
-# 
-# set.seed(1223)
-# dados <- sample_n(dados, 5000)
-# dados <- dados %>% mutate(id = row_number())
-
-data("BostonHousing")
-
-dados <- BostonHousing %>% select(-chas)
-
-glimpse(dados)
+dados <- read_csv("../datasets/House_price.csv", col_types = cols_only(
+  `Avg. Area Income` = col_double(),
+  `House Age` = col_double(),
+  `Number of Rooms` = col_double(),
+  `Number of Bedrooms` = col_double(),
+  `Area Population` = col_double(),
+  Price = col_double()
+))
 ```
 
-## Construção do modelo
+### Separação em treino e teste
+
+Iremos separar nosso conjunto de dados em treino e teste, com as proporções de 80% e 20%, respectivamente. Com isso, poderemos avaliar o desempenho do modelo em dados que este não viu previamente descartando a possibilidade de *overfitting*.
 
 ```{r}
-dados %>% cor() %>% corrplot(type = "upper", order = "hclust", 
-         tl.col = "black", tl.srt = 45)
+set.seed(1223)
+treino <- sample_frac(dados, .8)
+teste <- setdiff(dados, treino)
 ```
 
+## Criando o modelo
+
+Criaremos o modelo linear utilizando a função `lm`.
 
 ```{r}
-mod <- lm(medv ~ lstat + rm, dados)
+mod <- lm(Price ~ ., dados)
 ```
 
-## Análise gráfica
+## Testando os pressupostos
 
-```{r}
-plot(mod)
-```
+### Normalidade dos resíduos
 
-## Normalidade dos resíduos
+Para avaliar a normalidade dos resíduos, aplicaremos o teste de Shapiro-Wilk, nesse teste temos:
+
+-   $H_0:$ distribuição dos dados = normal
+-   $H_1:$ distribuição dos dados $\neq$ normal
 
 ```{r}
 shapiro.test(mod$residuals)
 ```
 
-## Outliers dos residuos
+Temos um p-value de aproximadamente 0.06, assim considerando um nível de significância de 5% podemos assumir a normalidade dos resíduos.
+
+### Outliers nos resíduos
 
 ```{r}
 summary(rstandard(mod))
 ```
 
+Vemos que a distribuição dos resíduos padronizados está entre -2 e 2, assim podemos concluir que não temos nenhum outlier.
+
+### Independência dos resíduos
+
+Iremos verificar a independência dos resíduos a partir do teste Durbin-Watson, nele temos as seguintes hipóteses:
+
+-   $H_0:\rho = 0$, não há autocorrelação dos resíduos
+-   $H_1:\rho\neq0$, há autocorrelação dos resíduos
+
 ```{r}
-boxplot(dados$price)
+car::durbinWatsonTest(mod)
 ```
 
+Considerando um nível de significância de 5%, como o p-value é maior que ele, assumimos a hipótese nula, assim confirmando que os resíduos são independentes.
+
+### Homocedasticidade
+
+Verificaremos a seguir a presença de homocedasticidade, ou seja, variância constante dos resíduos, temos como hipóteses:
+
+-   $H_0:$ há homocedasticidade
+-   $H_1:$ não há homocedasticidade
+
+```{r}
+lmtest::bptest(mod)
+```
+
+Temos um p-value menor que 5%, sendo assim devemos assumir a hipótese alternativa e portanto não temos homocedasticidade.
+
+### Ausência de multicolinearidade
+
+Vamos então avaliar se existe multicolinearidade, ou seja, alguma correlação muito alta entre as variáveis independentes. Consideraremos uma correlação alta se ela for maior que 0.8, em módulo.
+
+```{r}
+psych::pairs.panels(dados)
+```
+
+Pelo gráfico acima, vemos que a correlação entre as variáveis independentes é bastante baixa (0.10), assim indicando que não há multicolinearidade. Podemos ver ainda que a variável pesquisa tem uma baixa correlação com a variável alvo faturamente, sugerindo que talvez ela não seja necessária ao modelo.
+
+Outra forma de verificar a ausência de multicolinearidade é através da função VIF (inflação da variância):
+
+```{r}
+car::vif(mod)
+```
+
+Consideramos que existe multicolinearidade caso o valor de VIF da variável seja maior que 10, como vemos não é nosso caso. Assim, confirmamos que não temos multicolinearidade.
+
+## Analisando o modelo
+
+```{r}
+summary(mod)
+```
+
+Pelo exposto acima, vemos que a variável pesquisa apresenta uma baixa significância no modelo (o coeficiente da variável é próximo a zero), conforme suposto pela sua baixa correlação.
+
+Podemos ver ainda que obtivemos um R² ajustado de 0.86, e vemos que a estatística F tem um p-value muito baixo, assim com muita significância podemos afirmar que o modelo é melhor que o modelo nulo (ou seja, simplesmente prever utilizando a média).
+
+Este resultado pode indicar que temos um bom modelo ou que está havendo *overfitting*, precisamos então realizar um teste para avaliar o R² do modelo com dados desconhecidos.
+
+## Realizando predição com o modelo
+
+Iremos realizar uma predição usando o nosso modelo treino e o conjunto de dados que separamos como conjunto de teste e avaliar o R² obtido.
+
+```{r}
+predicoes <- predict.lm(mod, teste)
+yardstick::rsq_vec(teste$Price, predicoes)
+```
+
+Obtivemos um R² de aproximadamente 0.73, indicando que temos de fato um bom modelo.
