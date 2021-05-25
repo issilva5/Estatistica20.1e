@@ -6,11 +6,16 @@ library(tidyverse)
 
 ## Carregando os dados
 
+Os dados provém [](), os mesmos se referem aos preços de casas nos EUA.
+
 A seguir, fazemos a leitura dos dados, neles encontramos três colunas:
 
--   faturamento, nossa variável *target*;
--   pesquisa
--   propaganda
+-   Ganho médio por área
+-   Idade da casa
+-   Número de cômodos
+-   Número de quartos
+-   População da área
+-   Preço
 
 ```{r}
 dados <- read_csv("../datasets/House_price.csv", col_types = cols_only(
@@ -38,7 +43,7 @@ teste <- setdiff(dados, treino)
 Criaremos o modelo linear utilizando a função `lm`.
 
 ```{r}
-mod <- lm(Price ~ ., dados)
+mod <- lm(Price ~ ., treino)
 ```
 
 ## Testando os pressupostos
@@ -54,7 +59,7 @@ Para avaliar a normalidade dos resíduos, aplicaremos o teste de Shapiro-Wilk, n
 shapiro.test(mod$residuals)
 ```
 
-Temos um p-value de aproximadamente 0.06, assim considerando um nível de significância de 5% podemos assumir a normalidade dos resíduos.
+Temos um p-value de aproximadamente 0,35, sendo então o p-value de grande valor, podemos assumir a normalidade dos resíduos.
 
 ### Outliers nos resíduos
 
@@ -62,7 +67,7 @@ Temos um p-value de aproximadamente 0.06, assim considerando um nível de signif
 summary(rstandard(mod))
 ```
 
-Vemos que a distribuição dos resíduos padronizados está entre -2 e 2, assim podemos concluir que não temos nenhum outlier.
+Vemos que a distribuição dos resíduos padronizados está entre -3,5 e 3,5, assim podemos concluir que não temos nenhum outlier.
 
 ### Independência dos resíduos
 
@@ -75,7 +80,7 @@ Iremos verificar a independência dos resíduos a partir do teste Durbin-Watson,
 car::durbinWatsonTest(mod)
 ```
 
-Considerando um nível de significância de 5%, como o p-value é maior que ele, assumimos a hipótese nula, assim confirmando que os resíduos são independentes.
+Temos um p-value de aproximadamente 0,42, sendo então o p-value de grande valor, podemos assumir a normalidade dos resíduos.
 
 ### Homocedasticidade
 
@@ -88,7 +93,7 @@ Verificaremos a seguir a presença de homocedasticidade, ou seja, variância con
 lmtest::bptest(mod)
 ```
 
-Temos um p-value menor que 5%, sendo assim devemos assumir a hipótese alternativa e portanto não temos homocedasticidade.
+Temos um p-value maior que 5%, sendo assim devemos assumir a hipótese alternativa e portanto temos homocedasticidade.
 
 ### Ausência de multicolinearidade
 
@@ -98,7 +103,7 @@ Vamos então avaliar se existe multicolinearidade, ou seja, alguma correlação 
 psych::pairs.panels(dados)
 ```
 
-Pelo gráfico acima, vemos que a correlação entre as variáveis independentes é bastante baixa (0.10), assim indicando que não há multicolinearidade. Podemos ver ainda que a variável pesquisa tem uma baixa correlação com a variável alvo faturamente, sugerindo que talvez ela não seja necessária ao modelo.
+Pelo gráfico acima, vemos que a correlação entre as variáveis independentes é bastante baixa, assim indicando que não há multicolinearidade.
 
 Outra forma de verificar a ausência de multicolinearidade é através da função VIF (inflação da variância):
 
@@ -114,9 +119,9 @@ Consideramos que existe multicolinearidade caso o valor de VIF da variável seja
 summary(mod)
 ```
 
-Pelo exposto acima, vemos que a variável pesquisa apresenta uma baixa significância no modelo (o coeficiente da variável é próximo a zero), conforme suposto pela sua baixa correlação.
+Pelo exposto acima, vemos que todas as variáveis tem relevância ao modelo, exceto o número de quartos. Isto se deve ao fato de ter baixa correlação (0,18) à variável alvo.
 
-Podemos ver ainda que obtivemos um R² ajustado de 0.86, e vemos que a estatística F tem um p-value muito baixo, assim com muita significância podemos afirmar que o modelo é melhor que o modelo nulo (ou seja, simplesmente prever utilizando a média).
+Podemos ver ainda que obtivemos um R² ajustado de 0,92, e vemos que a estatística F tem um p-value muito baixo, assim com muita significância podemos afirmar que o modelo é melhor que o modelo nulo (ou seja, simplesmente prever utilizando a média).
 
 Este resultado pode indicar que temos um bom modelo ou que está havendo *overfitting*, precisamos então realizar um teste para avaliar o R² do modelo com dados desconhecidos.
 
@@ -129,4 +134,4 @@ predicoes <- predict.lm(mod, teste)
 yardstick::rsq_vec(teste$Price, predicoes)
 ```
 
-Obtivemos um R² de aproximadamente 0.73, indicando que temos de fato um bom modelo.
+Obtivemos um R² de aproximadamente 0.92, indicando que temos de fato um bom modelo.

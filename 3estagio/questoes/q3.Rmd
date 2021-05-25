@@ -32,7 +32,7 @@ teste <- setdiff(dados, treino)
 Criaremos o modelo linear utilizando a função `lm`.
 
 ```{r}
-mod <- lm(faturamento ~ ., dados)
+mod <- lm(faturamento ~ ., treino)
 ```
 
 ## Testando os pressupostos
@@ -48,7 +48,7 @@ Para avaliar a normalidade dos resíduos, aplicaremos o teste de Shapiro-Wilk, n
 shapiro.test(mod$residuals)
 ```
 
-Temos um p-value de aproximadamente 0.06, assim considerando um nível de significância de 5% podemos assumir a normalidade dos resíduos.
+Temos um p-value de aproximadamente 0.08, assim considerando um nível de significância de 5% podemos assumir a normalidade dos resíduos.
 
 ### Outliers nos resíduos
 
