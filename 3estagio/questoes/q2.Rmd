@@ -15,23 +15,20 @@ y <- c(dados$pesquadrados)
 
 Calculemos agora os somatórios úties para o cálculo do coeficiente de correlação
 
-
 ```{r}
 # Somatórios úteis
-n = length(x); n
+n = length(x)
 S.xy = sum(x*y) - n*mean(x)*mean(y)
 S.xx = sum(x*x) - n*mean(x)*mean(x)
 S.yy = sum(y*y) - n*mean(y)*mean(y)
 ```
 
-Com os somatórios calculados, agora podemos calcular o coeficiente r
+Com os somatórios calculados, agora podemos calcular o coeficiente de correlação $r$:
 ```{r}
-# Correlação linear
 r = S.xy / sqrt(S.xx * S.yy)
 r
 ```
-
-Sendo r = 0.75, observamos um forte indicio de correlação linear positiva entre o preço e pes quadrados dos imoveis, ou seja, é forte a evidência que quanto maior o preço maior será o tamanho do imóvel.
+Sendo r = 0,75, observamos um forte indicio de correlação linear positiva entre o preço e pés quadrados dos imoveis, ou seja, é forte a evidência que quanto maior o preço maior será o tamanho do imóvel.
 
 ## Regressão Linear
 
@@ -39,12 +36,55 @@ Utilizando os dados já carregados e calculados acima, iremos calcular a regress
 que melhor representa a relação linear entre as variáveis preço e pes quadrados.
 
 ```{r}
-# Regressão linear simples
 beta.1 = S.xy / S.xx
 beta.1
 
 beta.0 = mean(y) - beta.1 * mean(x)
 beta.0
 ```
-
 A regressão utilizada se trata do tipo linear simples, visto que os dados se tratam de n pares de variáveis quantitativas.
+
+## Utilizando a regressão
+
+Vamos calcular os valores utilizando nossa predição $\beta_0$ e $\beta_1$, e usá-la para prever o valores de pés quadrados.
+
+```{r}
+y.pred = beta.0 + beta.1*x
+```
+
+Vejamos então a nossa soma de residuos e o coeficiente de determinação:
+
+```{r}
+SQTot = S.yy
+
+cof.det = r^2
+SQReg = SQTot * r^2
+
+SQRes = SQTot - SQReg
+```
+Temos um coeficiente de determinação de `r cof.det` que indica um bom modelo. E uma soma de quadrado dos resíduos de `r SQRes` que usaremos para calcular o valor-p para a estatística F:
+
+```{r}
+n = length(y)
+gl.num = 1
+gl.den = n - 2
+
+QMReg = SQReg / gl.num
+
+QMRes = SQRes / gl.den
+
+F.obs = QMReg / QMRes
+
+valor.p = pf(F.obs, gl.num, gl.den, lower.tail = FALSE)
+valor.p
+```
+Temos um valor-p muito pequeno, assim considerando o Teste de Hipótese da estatística F, no qual a hipótese nula é que a regressão é igual ao modelo nulo (que sempre prevê a média) e a hipótese alternativa é que a regressão é diferente do modelo nulo, podemos com forte evidência afirmar que a regressão é diferente modelo nulo. Em outras, palavras é melhor usar a regressão do que simplesmente a média.
+
+## Usando a função nativa do R
+
+```{r}
+md = lm(preco ~ pesquadrados, dados)
+summary(md)
+```
+
+Pela função nativa corroboramos o que encontramos manualmente, tendo um $R^2$ de 0,56 e um valor-p muito pequeno para a estatística F.
