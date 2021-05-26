@@ -1,1 +1,7 @@
+# Questão 1
+
+O objetivo da análise de correlação é medir a intensidade ou grau de relacionamento entre duas variáveis. A regressão linear busca representar ou descrever a relação entre duas variaveís, por meio de uma equação matemática linear. A diferença entre as análises é que enquanto a análise da correlação resulta em um valor, que mede o grau da relação, a regressão resulta em uma equação matemática.
+Exemplo:
+
+Supondo que queremos explicar o valor do preço de carros em função de sua quilometragem. A partir de dados coletados do preço de vários carros e suas respectivas quilometragens, a análise de correlação nos retornaria um valor que indicaria se essa correlação faz sentido. A regressão linear retornaria uma equação que representaria essa relação.
 

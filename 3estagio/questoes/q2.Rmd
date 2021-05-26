@@ -1,1 +1,50 @@
+# Questão 2
 
+```{r echo=FALSE, message=FALSE}
+library(readxl)
+```
+
+Primeiro iremos carregar os dados da planilha:
+```{r}
+dados <- read_xls("../datasets/preco-de-imoveis.xls")
+x <- c(dados$preco)
+y <- c(dados$pesquadrados)
+```
+
+## Correlação Linear
+
+Calculemos agora os somatórios úties para o cálculo do coeficiente de correlação
+
+
+```{r}
+# Somatórios úteis
+n = length(x); n
+S.xy = sum(x*y) - n*mean(x)*mean(y)
+S.xx = sum(x*x) - n*mean(x)*mean(x)
+S.yy = sum(y*y) - n*mean(y)*mean(y)
+```
+
+Com os somatórios calculados, agora podemos calcular o coeficiente r
+```{r}
+# Correlação linear
+r = S.xy / sqrt(S.xx * S.yy)
+r
+```
+
+Sendo r = 0.75, observamos um forte indicio de correlação linear positiva entre o preço e pes quadrados dos imoveis, ou seja, é forte a evidência que quanto maior o preço maior será o tamanho do imóvel.
+
+## Regressão Linear
+
+Utilizando os dados já carregados e calculados acima, iremos calcular a regressão linear que determinar os valores $\beta_0$ e $\beta_1$
+que melhor representa a relação linear entre as variáveis preço e pes quadrados.
+
+```{r}
+# Regressão linear simples
+beta.1 = S.xy / S.xx
+beta.1
+
+beta.0 = mean(y) - beta.1 * mean(x)
+beta.0
+```
+
+A regressão utilizada se trata do tipo linear simples, visto que os dados se tratam de n pares de variáveis quantitativas.
