@@ -1,6 +1,7 @@
 ---
 title: "Conflitos em times de desenvolvimento de software no contexto dos projetos das disciplinas"
 author: "João Marcelo Fernandes da Silva Júnior^[joao.marcelo.junior@ccc.ufcg.edu.br], Gabriela Roberta Alverga do Nascimento, Ítallo de Sousa Silva, Thiago Nascimento de Lima"
+bibliography: 'partes/references.bib'
 output: 
   html_document:
     code_folding: hide
@@ -31,3 +32,5 @@ options(scipen = 10, digits = 4, OutDec = ",")
 
 ```{r child = 'partes/conclusao.Rmd'}
 ```
+
+# Referências

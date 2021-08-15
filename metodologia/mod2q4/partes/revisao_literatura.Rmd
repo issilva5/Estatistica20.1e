@@ -1,3 +1,5 @@
 # Revisão da literatura
 
 Nesta seção transformo as informações que estão jogadas na letra b da questão 4 em um texto estruturado, explicando os tipos de conflitos e os tipos de gerenciamento encontrados na literatura.
+
+Exemplo de como citar: @R-base ou [@R-base] para por entre parenteses. Coloquem as citações no arquivo `partes/reference.bib`. Para informações sobre como incluir a referência no arquivo veja [aqui](https://en.wikipedia.org/wiki/BibTeX#Bibliographic_information_file) todos os tipos de citação e os campos possíveis.
