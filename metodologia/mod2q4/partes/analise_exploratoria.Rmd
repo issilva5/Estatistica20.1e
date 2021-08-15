@@ -1,0 +1,3 @@
+# Análise dos resultados
+
+Gere uma análise descritiva e exploratória dos dados obtidos para ter um entendimento inicial dos dados.

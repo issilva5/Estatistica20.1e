@@ -1,0 +1,3 @@
+# Metodologia
+
+Nesta seção descrever o survey/questionário, quais suas seções, suas perguntas, explicar as adaptações que foram feitas entre o encontrado na literatura e o que usamos, por exemplo, os tipos de conflitos que foram desconsiderados por não se encaixarem no contexto.

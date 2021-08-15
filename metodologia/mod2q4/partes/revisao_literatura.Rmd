@@ -1,0 +1,3 @@
+# Revisão da literatura
+
+Nesta seção transformo as informações que estão jogadas na letra b da questão 4 em um texto estruturado, explicando os tipos de conflitos e os tipos de gerenciamento encontrados na literatura.

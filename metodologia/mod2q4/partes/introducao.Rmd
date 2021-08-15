@@ -1,0 +1,3 @@
+# Introdução
+
+Nesta seção deve ficar a explicação do tema e das hipóteses, assim como o contexto que levou a sua escolha.
