@@ -1,3 +1,8 @@
 # Conclusões
 
 Teste a hipótese (não são necessários testes de hipóteses formais). Qual o resultado?
+
+Conflitos decorrentes de desacordo sobre as tarefas são os mais frequentes.
+Conflitos decorrentes de relacionamentos entre os membros da equipe são os que têm maior impacto negativo no projeto.
+Modos de gerenciamento que seguem abordagens colaborativas afetam positivamente o projeto. 
+Modos de gerenciamento que ignoram ou propõem soluções autoritárias para os conflitos afetam negativamente o projeto.
