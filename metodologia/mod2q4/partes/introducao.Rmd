@@ -16,7 +16,7 @@ Enquanto que as **hipóteses** a serem testadas a partir do survey são:
 
 * Conflitos decorrentes de desacordo sobre as tarefas são os mais frequentes.
 * Conflitos decorrentes de relacionamentos entre os membros da equipe são os que têm maior impacto negativo no projeto.
-* Modos de gerenciamento que seguem abordagens colaborativas afetam positivamente o projeto. 
-* Modos de gerenciamento que ignoram ou propõem soluções autoritárias para os conflitos afetam negativamente o projeto.
+* Modos de gerenciamento que seguem abordagens colaborativas são mais empregado nos projetos. 
+* Modos de gerenciamento que ignoram ou propõem soluções autoritárias para os conflitos são menos efetivos em sua resolução.
 
 Essas hipóteses baseiam-se nos tipos de conflitos e formas de gerenciamento de conflitos encontrados na literatura, como também na experiência pessoal dos membros desse estudo.
