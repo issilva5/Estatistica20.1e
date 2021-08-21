@@ -3,3 +3,29 @@
 Nesta seção transformo as informações que estão jogadas na letra b da questão 4 em um texto estruturado, explicando os tipos de conflitos e os tipos de gerenciamento encontrados na literatura.
 
 Exemplo de como citar: @R-base. Para citar mais de um [@R-base; @R-stringr]. Coloquem as citações no arquivo `metadata/reference.bib`. Para informações sobre como incluir a referência no arquivo veja [aqui](https://en.wikipedia.org/wiki/BibTeX#Bibliographic_information_file) todos os tipos de citação e os campos possíveis.
+
+Na litetura podem ser encontrado diversos estudos sobre os tipos de conflitos encontrados em projetos, como também as formas comuns de gerenciamento dos conflitos.
+Em @verma1998conflict são relatadas as sete maiores fontes de conflitos identificadas em projetos, que são baseadas em uma pesquisa realizada em uma empresa privada por @thamhain1975conflict.
+Os tipos de conflito, de acordo com estudos citados, são:
+
+* Conflitos sobre prioridades do projeto, ou seja, sobre quais atividades e tarefas devem ser executadas e em que sequência.
+
+* Conflitos sobre gerenciamento, ou seja, sobre a definição da hierarquia, das responsabilidades, do plano de execução, do procedimento de comunicação de atividades, etc.
+
+* Conflitos sobre questões técnicas, ou seja, sobre quais tecnologias, algoritmos e otimizações utilizar.
+
+* Conflito sobre prazos, ou seja, sobre a duração e data de entrega de tarefas do projeto.
+
+* Conflitos sobre personalidades, ou seja, centrados nas diferenças interpessoais do grupo.
+
+O gerenciamento de conflitos é muito importante para o sucesso do projeto e @verma1998conflict cinco métodos de gerenciamento de conflitos quais são:
+
+* Confronto (Confrontation): reconhecendo que a discordância existe e considerando os requisitos, debater para escolher a solução que mais está de acordo.
+
+* Negociação (Give and Take): reconhecendo que a discordância existe, produzir uma solução combinando partes das propostas dos membros envolvidos.
+
+* Evasão (Withdrawal): ignorar o problema ou reconhecer que ele existe, mas considerar que não vale o esforço da resolução.
+
+* Apaziguamento (Smoothing): reconhecendo que a discordância existe, escolher a solução daqueles mais envolvidos com a tarefa.
+
+* Imposição (Forcing): reconhecendo que a discordância existe, um membro de maior hierarquia (ex. gerente) impõe a solução.
